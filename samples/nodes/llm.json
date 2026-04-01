@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "node_type": "llm",
+    "description": "大模型节点 — 调用 AI 模型处理文本输入并生成回复",
+    "collected_date": "PENDING",
+    "coze_note": "在 Coze 工作流画布中添加大模型节点，配置好模型选择和系统提示词后右键复制",
+    "fields": {
+      "model_id": "调用的模型标识符",
+      "system_prompt": "系统提示词，定义模型角色和行为",
+      "user_input": "用户输入变量引用",
+      "temperature": "生成随机性控制，0-1 之间",
+      "output_variable": "输出结果存储的变量名"
+    }
+  },
+  "node": {}
+}

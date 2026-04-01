@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "node_type": "code",
+    "description": "代码节点 — 执行自定义 JavaScript 或 Python 代码片段",
+    "collected_date": "PENDING",
+    "coze_note": "在 Coze 工作流画布中添加代码节点，写入代码并配置输入输出变量后右键复制",
+    "fields": {
+      "language": "编程语言，javascript 或 python",
+      "code": "要执行的代码字符串",
+      "input_bindings": "代码中使用的输入变量绑定",
+      "output_bindings": "代码执行后输出变量绑定"
+    }
+  },
+  "node": {}
+}
