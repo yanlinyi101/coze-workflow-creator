@@ -2,7 +2,7 @@
   "meta": {
     "node_type": "http",
     "description": "HTTP 请求节点 — 发送 GET/POST 等请求到外部接口",
-    "collected_date": "PENDING",
+    "collected_date": "2026-04-01",
     "coze_note": "在 Coze 工作流画布中添加 HTTP 节点，配置请求方法和 URL 后右键复制",
     "fields": {
       "method": "请求方法，如 GET、POST",
@@ -11,5 +11,5 @@
       "body": "请求体内容"
     }
   },
-  "node": {}
+  "node": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"102338","type":"45","meta":{"position":{"x":243.01518171596243,"y":-42.41016483590653}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"GET","url":"http://sample"},"body":{"bodyType":"EMPTY","bodyData":{"binary":{"fileURL":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"","name":""}}}}}},"headers":[],"params":[],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":120,"retryTimes":3},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":63.01518171596243,"y":-42.41016483590653,"width":360,"height":114},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":63.01518171596243,"y":-42.41016483590653,"width":360,"height":114}}
 }

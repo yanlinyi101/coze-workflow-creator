@@ -2,12 +2,12 @@
   "meta": {
     "node_type": "condition",
     "description": "条件分支节点 — 根据条件将流程分叉到不同路径",
-    "collected_date": "PENDING",
+    "collected_date": "2026-04-01",
     "coze_note": "在 Coze 工作流画布中添加条件节点，配置至少一个分支条件后右键复制",
     "fields": {
       "conditions": "分支条件数组，每个条件包含判断表达式和分支标识",
       "default_branch": "当所有条件都不满足时走的默认分支"
     }
   },
-  "node": {}
+  "node": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"162035","type":"8","meta":{"position":{"x":-183.04003099300132,"y":-222.98985763970563}},"data":{"nodeMeta":{"title":"选择器","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Condition-v2.jpg","description":"连接多个下游分支，若设定的条件成立则仅运行对应的分支，若均不成立则只运行\"否则\"分支","mainColor":"#00B2B2","subTitle":"选择器"},"inputs":{"branches":[{"condition":{"logic":2,"conditions":[{}]}}]}},"_temp":{"bounds":{"x":-363.0400309930013,"y":-222.98985763970563,"width":360,"height":136},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Condition-v2.jpg","description":"连接多个下游分支，若设定的条件成立则仅运行对应的分支，若均不成立则只运行\"否则\"分支","title":"选择器","mainColor":"#00B2B2"}}}],"edges":[]},"bounds":{"x":-363.0400309930013,"y":-222.98985763970563,"width":360,"height":136}}
 }
