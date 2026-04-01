@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "node_type": "http",
+    "description": "HTTP 请求节点 — 发送 GET/POST 等请求到外部接口",
+    "collected_date": "PENDING",
+    "coze_note": "在 Coze 工作流画布中添加 HTTP 节点，配置请求方法和 URL 后右键复制",
+    "fields": {
+      "method": "请求方法，如 GET、POST",
+      "url": "请求目标 URL，支持变量引用",
+      "headers": "请求头键值对",
+      "body": "请求体内容"
+    }
+  },
+  "node": {}
+}

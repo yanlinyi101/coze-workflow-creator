@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "node_type": "plugin",
+    "description": "插件调用节点 — 调用 Coze 插件市场中的插件",
+    "collected_date": "PENDING",
+    "coze_note": "在 Coze 工作流画布中添加插件节点，选择插件和具体工具后右键复制",
+    "fields": {
+      "plugin_id": "插件唯一标识",
+      "tool_name": "插件内具体工具名称",
+      "input": "传入插件的参数对象"
+    }
+  },
+  "node": {}
+}

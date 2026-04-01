@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "node_type": "condition",
+    "description": "条件分支节点 — 根据条件将流程分叉到不同路径",
+    "collected_date": "PENDING",
+    "coze_note": "在 Coze 工作流画布中添加条件节点，配置至少一个分支条件后右键复制",
+    "fields": {
+      "conditions": "分支条件数组，每个条件包含判断表达式和分支标识",
+      "default_branch": "当所有条件都不满足时走的默认分支"
+    }
+  },
+  "node": {}
+}
