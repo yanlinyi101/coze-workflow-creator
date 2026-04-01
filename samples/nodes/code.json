@@ -11,5 +11,110 @@
       "output_bindings": "代码执行后输出变量绑定"
     }
   },
-  "node": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"168617","type":"5","meta":{"position":{"x":164.01156611430042,"y":-107.30599193727181}},"data":{"nodeMeta":{"title":"代码","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Code-v2.jpg","description":"编写代码，处理输入变量来生成返回值","mainColor":"#00B2B2","subTitle":"代码"},"inputs":{"inputParameters":[{"name":"input","input":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"100001","name":"birth_date"},"rawMeta":{"type":1}}}}],"code":"// 在这里，您可以通过 'params'  获取节点中的输入变量，并通过 'ret' 输出结果\n// 'params' 已经被正确地注入到环境中\n// 下面是一个示例，获取节点输入中参数名为'input'的值：\n// const input = params.input; \n// 下面是一个示例，输出一个包含多种数据类型的 'ret' 对象：\n// const ret = { \"name\": '小明', \"hobbies\": [\"看书\", \"旅游\"] };\n\nasync function main({ params }: Args): Promise<Output> {\n    // 构建输出对象\n    const ret = {\n        \"key0\": params.input + params.input, // 拼接两次入参 input 的值\n        \"key1\": [\"hello\", \"world\"], // 输出一个数组\n        \"key2\": { // 输出一个Object\n            \"key21\": \"hi\"\n        },\n    };\n\n    return ret;\n}","language":5,"settingOnError":{"processType":1,"timeoutMs":60000,"retryTimes":0}},"outputs":[{"type":"string","name":"key0"},{"type":"list","name":"key1","schema":{"type":"string"}},{"type":"object","name":"key2","schema":[{"type":"string","name":"key21"}]}],"version":"v2"},"_temp":{"bounds":{"x":-15.988433885699578,"y":-107.30599193727181,"width":360,"height":112},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Code-v2.jpg","description":"编写代码，处理输入变量来生成返回值","title":"代码","mainColor":"#00B2B2"}}}],"edges":[]},"bounds":{"x":-15.988433885699578,"y":-107.30599193727181,"width":360,"height":112}}
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7620748207420686374",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "168617",
+          "type": "5",
+          "meta": {
+            "position": {
+              "x": 164.01156611430042,
+              "y": -107.30599193727181
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "title": "代码",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Code-v2.jpg",
+              "description": "编写代码，处理输入变量来生成返回值",
+              "mainColor": "#00B2B2",
+              "subTitle": "代码"
+            },
+            "inputs": {
+              "inputParameters": [
+                {
+                  "name": "input",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "100001",
+                        "name": "birth_date"
+                      },
+                      "rawMeta": {
+                        "type": 1
+                      }
+                    }
+                  }
+                }
+              ],
+              "code": "",
+              "language": 5,
+              "settingOnError": {
+                "processType": 1,
+                "timeoutMs": 60000,
+                "retryTimes": 0
+              }
+            },
+            "outputs": [
+              {
+                "type": "string",
+                "name": "key0"
+              },
+              {
+                "type": "list",
+                "name": "key1",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "object",
+                "name": "key2",
+                "schema": [
+                  {
+                    "type": "string",
+                    "name": "key21"
+                  }
+                ]
+              }
+            ],
+            "version": "v2"
+          },
+          "_temp": {
+            "bounds": {
+              "x": -15.988433885699578,
+              "y": -107.30599193727181,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Code-v2.jpg",
+              "description": "编写代码，处理输入变量来生成返回值",
+              "title": "代码",
+              "mainColor": "#00B2B2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": -15.988433885699578,
+      "y": -107.30599193727181,
+      "width": 360,
+      "height": 112
+    }
+  }
 }
