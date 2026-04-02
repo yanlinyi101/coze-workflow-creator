@@ -1,15 +1,26 @@
 {
   "meta": {
     "node_type": "http",
-    "description": "HTTP 请求节点 — 发送 GET/POST 等请求到外部接口",
-    "collected_date": "2026-04-01",
-    "coze_note": "在 Coze 工作流画布中添加 HTTP 节点，配置请求方法和 URL 后右键复制",
+    "description": "HTTP 请求节点 — 发送 GET/POST/PUT 等请求到外部接口",
+    "collected_date": "2026-04-02",
+    "coze_note": "在 Coze 工作流画布中添加 HTTP 节点，配置完整参数后右键复制",
+    "critical_rules": {
+      "inputParameters": "始终为 [] （空数组），HTTP 节点不使用此字段",
+      "variable_ref": "外部节点变量引用放在 inputs.params[] 中，用 name + input 结构",
+      "body_template": "body 内容用 {{variable_name}} 模板语法引用变量，不直接写 ref 对象",
+      "binary_section": "⚠️ 绝对不能包含 bodyData.binary（即使 Coze 自动添加也必须删除），空 blockID 会导致 'ref block output format error, not found [blockID]'",
+      "headers": "请求头用 name + input 结构，与 params 一致",
+      "coze_sandbox": "代码节点沙箱封锁出站 fetch()，外部 HTTP 请求必须用 HTTP 节点实现"
+    },
     "fields": {
-      "method": "请求方法，如 GET、POST",
-      "url": "请求目标 URL，支持变量引用",
-      "headers": "请求头键值对",
-      "body": "请求体内容"
+      "inputs.apiInfo.method": "请求方法：GET / POST / PUT / DELETE",
+      "inputs.apiInfo.url": "请求目标 URL（固定字符串）",
+      "inputs.params": "变量引用列表，每项 {name, input:{type,value:{type:'ref',...}}}",
+      "inputs.headers": "请求头列表，每项 {name, input:{type,value:{type:'literal',content:'...',rawMeta:{type:1}}}}",
+      "inputs.body.bodyType": "EMPTY / RAW / JSON / FORM_DATA",
+      "inputs.body.bodyData.raw.rawData": "RAW body 内容，value 用 literal + {{variable_name}} 模板"
     }
   },
-  "node": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"102338","type":"45","meta":{"position":{"x":243.01518171596243,"y":-42.41016483590653}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"GET","url":"http://sample"},"body":{"bodyType":"EMPTY","bodyData":{"binary":{"fileURL":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"","name":""}}}}}},"headers":[],"params":[],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":120,"retryTimes":3},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":63.01518171596243,"y":-42.41016483590653,"width":360,"height":114},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":63.01518171596243,"y":-42.41016483590653,"width":360,"height":114}}
+  "node_get": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"126374","type":"45","meta":{"position":{"x":3077.269317466962,"y":-49.06434485224764}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"GET","url":"https://api.example.com/data"},"body":{"bodyType":"EMPTY","bodyData":{}},"headers":[],"params":[],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":120,"retryTimes":3},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":2897.269317466962,"y":-49.06434485224764,"width":360,"height":114},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":2897.269317466962,"y":-49.06434485224764,"width":360,"height":114}},
+  "node_put_raw": {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"1770495","type":"45","meta":{"position":{"x":2831.98392618769,"y":229.33285662879115}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"PUT","url":"https://api.example.com/upload"},"body":{"bodyType":"RAW","bodyData":{"raw":{"rawData":{"type":"string","value":{"type":"literal","content":"{{my_content}}","rawMeta":{"type":1}}}}}},"headers":[{"name":"Content-Type","input":{"type":"string","value":{"type":"literal","content":"text/plain; charset=utf-8","rawMeta":{"type":1}}}},{"name":"X-Custom-Header","input":{"type":"string","value":{"type":"literal","content":"value","rawMeta":{"type":1}}}}],"params":[{"name":"my_content","input":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"REPLACE_WITH_ACTUAL_NODE_ID","name":"REPLACE_WITH_OUTPUT_NAME"},"rawMeta":{"type":1}}}}],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":30,"retryTimes":1},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138}}
 }
