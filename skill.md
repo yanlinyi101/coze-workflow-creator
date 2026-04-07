@@ -145,24 +145,69 @@ print('已打开粘贴助手页面')
 
 ### HTTP 请求节点 (http)
 
-**关键格式规范（违反会导致运行报错 `ref block output format error, not found [blockID]`）：**
+**关键格式规范：**
 - `inputParameters` 始终为 `[]`，HTTP 节点**不使用**此字段
-- 外部变量引用放在 `inputs.params[]`，用 `name` + `input` 结构（与 LLM 节点的 `inputParameters` 不同）
-- `body` 内容用 `{{variable_name}}` 模板语法，**不直接写 ref 对象**
-- `bodyData` 中**绝对不能包含 `binary` 段**（Coze 会自动添加空 `binary`，但空 `blockID` 是报错根源，必须删除）
 - 请求头用 `name` + `input` 结构，值用 `literal`
 - `settingOnError` 为 `{}`（空对象），出现在 `inputs` 内和 `data` 顶层各一次
+- **代码节点沙箱封锁出站 `fetch()`**，外部 HTTP 请求必须用 HTTP 节点实现，不能在代码节点里调用
 
-**注意：代码节点沙箱封锁出站 `fetch()`**，外部 HTTP 请求必须用 HTTP 节点实现，不能在代码节点里调用。
+---
+
+#### ⚠️ HTTP 节点已知 Bug 速查表（必读，违反必报错）
+
+| # | 错误现象 | 根因 | 正确做法 |
+|---|---|---|---|
+| **Bug 1** | 运行报 `ref block output format error, not found [blockID]` | Coze 每次打开 HTTP 节点面板都会自动向 `bodyData` 注入 `"binary":{"fileURL":{"type":"ref","content":{"source":"block-output","blockID":"","name":""}}}}`，空 `blockID` 触发引用校验失败 | `binary` 必须存在但 `fileURL.value` 改为 `literal` 类型：`"binary":{"fileURL":{"type":"string","value":{"type":"literal","content":"","rawMeta":{"type":1}}}}` |
+| **Bug 2** | 运行报 `414 Request-URI Too Large` | `params[]` 的 ref 值会被**同时**写入 body 模板 **和** URL 查询串。发送大内容（如 HTML）时 URL 超出 nginx 默认 8KB 限制 | 服务端 nginx 加 `large_client_header_buffers 4 256k;`，服务端同时接受 body 和 query param；或避免通过 HTTP 节点发送超大内容 |
+
+**Bug 1 修复结构（`bodyData` 中 binary 的正确写法）：**
+```json
+"bodyData": {
+  "raw": {
+    "rawData": {
+      "type": "string",
+      "value": { "type": "literal", "content": "{{my_content}}", "rawMeta": { "type": 1 } }
+    }
+  },
+  "binary": {
+    "fileURL": {
+      "type": "string",
+      "value": { "type": "literal", "content": "", "rawMeta": { "type": 1 } }
+    }
+  }
+}
+```
+> 💡 `binary` 字段必须存在（否则 Coze 面板打开后会重新注入空 blockID 版本），但将 `fileURL.value.type` 改为 `"literal"` 可阻断 blockID 校验。
+
+**Bug 2 说明——`params[]` 的双重行为：**
+- `params[]` 中的 `ref` 变量会做两件事：① 替换 body 里的 `{{variable_name}}` 占位符；② **同时**将变量值拼接到请求 URL 的查询串
+- 发送小数据（< 4KB）一般无问题；发送大数据（HTML、长文本）必然触发 414
+- **服务端 nginx 应对方案**（在 `server {}` 块内添加）：
+  ```nginx
+  large_client_header_buffers 4 256k;
+  client_header_buffer_size   256k;
+  ```
+- **服务端 FastAPI 应对方案**（同时读 body 和 query param）：
+  ```python
+  @app.api_route("/your-endpoint", methods=["GET", "POST"])
+  async def handler(request: Request):
+      html = ""
+      if request.method == "POST":
+          html = (await request.body()).decode("utf-8")
+      if not html.strip():
+          html = request.query_params.get("my_content", "")
+  ```
+
+---
 
 **GET 请求（无 body）：**
 ```json
 {"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"126374","type":"45","meta":{"position":{"x":3077.269317466962,"y":-49.06434485224764}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"GET","url":"https://api.example.com/data"},"body":{"bodyType":"EMPTY","bodyData":{}},"headers":[],"params":[],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":120,"retryTimes":3},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":2897.269317466962,"y":-49.06434485224764,"width":360,"height":114},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":2897.269317466962,"y":-49.06434485224764,"width":360,"height":114}}
 ```
 
-**PUT/POST RAW body（引用上游节点变量）：**
+**POST/PUT RAW body（引用上游节点变量，含 Bug 1+2 修复）：**
 ```json
-{"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"1770495","type":"45","meta":{"position":{"x":2831.98392618769,"y":229.33285662879115}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"PUT","url":"https://api.example.com/upload"},"body":{"bodyType":"RAW","bodyData":{"raw":{"rawData":{"type":"string","value":{"type":"literal","content":"{{my_content}}","rawMeta":{"type":1}}}}}},"headers":[{"name":"Content-Type","input":{"type":"string","value":{"type":"literal","content":"text/plain; charset=utf-8","rawMeta":{"type":1}}}}],"params":[{"name":"my_content","input":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"上游节点ID","name":"上游输出变量名"},"rawMeta":{"type":1}}}}],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":30,"retryTimes":1},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138}}
+{"type":"coze-workflow-clipboard-data","source":{"workflowId":"7620748207420686374","flowMode":0,"spaceId":"7505956491577720843","isDouyin":false,"host":"www.coze.cn"},"json":{"nodes":[{"id":"1770495","type":"45","meta":{"position":{"x":2831.98392618769,"y":229.33285662879115}},"data":{"nodeMeta":{"title":"HTTP 请求","icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","mainColor":"#3071F2","subTitle":"HTTP 请求"},"inputParameters":[],"inputs":{"apiInfo":{"method":"POST","url":"https://api.example.com/upload"},"body":{"bodyType":"RAW","bodyData":{"raw":{"rawData":{"type":"string","value":{"type":"literal","content":"{{my_content}}","rawMeta":{"type":1}}}},"binary":{"fileURL":{"type":"string","value":{"type":"literal","content":"","rawMeta":{"type":1}}}}}},"headers":[{"name":"Content-Type","input":{"type":"string","value":{"type":"literal","content":"text/plain; charset=utf-8","rawMeta":{"type":1}}}}],"params":[{"name":"my_content","input":{"type":"string","value":{"type":"ref","content":{"source":"block-output","blockID":"上游节点ID","name":"上游输出变量名"},"rawMeta":{"type":1}}}}],"auth":{"authType":"BEARER_AUTH","authData":{"customData":{"addTo":"header"}},"authOpen":false},"setting":{"timeout":60,"retryTimes":1},"settingOnError":{}},"outputs":[{"type":"string","name":"body"},{"type":"integer","name":"statusCode"},{"type":"string","name":"headers"}],"settingOnError":{}},"_temp":{"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138},"externalData":{"icon":"https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-HTTP.png","description":"用于发送API请求，从接口返回数据","title":"HTTP 请求","mainColor":"#3071F2"}}}],"edges":[]},"bounds":{"x":2651.98392618769,"y":229.33285662879115,"width":360,"height":138}}
 ```
 
 > **样本更新：** 最新样本库（含条件分支、HTTP、插件等节点）见 https://github.com/yanlinyi101/coze-workflow-creator/tree/main/samples/nodes
