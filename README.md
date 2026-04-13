@@ -1,5 +1,7 @@
 # coze-workflow-creator
 
+[English](./README.en.md) | 中文
+
 > 这年头还需要自己学搭建 Coze 吗？让 [openclaw 小龙虾](https://openclaw.ai) 或者 Claude Code 学会这个 skill，你只需要提需求，让 AI Agent 帮你搭建 Coze 工作流。
 
 通过 AI 对话，帮助你在 Coze 平台设计并生成可直接粘贴的工作流节点 JSON。
