@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "node_type": "subworkflow",
+    "description": "子工作流节点 — 调用另一个 Coze 工作流作为当前流程的子模块",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "coze_note": "此节点通常作为 Loop 或 Batch 的 block 出现，也可作为独立节点使用。本样本来自循环体内的真实 clipboard 数据。",
+    "fields": {
+      "inputs.workflowId": "被调用的子工作流 ID",
+      "inputs.spaceId": "子工作流所在空间 ID",
+      "inputs.workflowVersion": "版本号，格式 'v1.0.0'，使用最新版时填写已发布版本号",
+      "inputs.inputDefs": "子工作流声明的输入参数定义（从子工作流元数据读取）。每项：{input:{}, name, required, type}",
+      "inputs.type": "固定为 0",
+      "inputs.inputParameters": "实际传入子工作流的参数值，每项 {name, input}，name 对应 inputDefs 中的参数名",
+      "inputs.settingOnError": "固定为 {}（空对象）",
+      "outputs": "子工作流的输出变量，需与子工作流的输出定义一致。每项 {type, name, required}",
+      "nodeMeta.isImageflow": "固定为 false",
+      "_temp.externalData": "含子工作流的完整元数据（latestVersion、mainColor 等），粘贴时保留原始值"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "192691",
+          "type": "9",
+          "meta": {
+            "position": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "title": "子工作流名称",
+              "description": "子工作流描述",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Workflow-v2.jpg",
+              "isImageflow": false
+            },
+            "inputs": {
+              "workflowId": "子工作流ID",
+              "spaceId": "空间ID",
+              "workflowVersion": "v1.0.0",
+              "inputDefs": [
+                {
+                  "input": {},
+                  "name": "param1",
+                  "required": true,
+                  "type": "string"
+                },
+                {
+                  "input": {},
+                  "name": "param2",
+                  "required": false,
+                  "type": "string"
+                }
+              ],
+              "type": 0,
+              "inputParameters": [
+                {
+                  "name": "param1",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {
+                        "type": 1
+                      }
+                    }
+                  }
+                }
+              ],
+              "settingOnError": {}
+            },
+            "outputs": [
+              {
+                "type": "string",
+                "name": "output",
+                "required": false
+              }
+            ]
+          },
+          "_temp": {
+            "bounds": {
+              "x": -180,
+              "y": 0,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "title": "子工作流名称",
+              "description": "子工作流描述",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Workflow-v2.jpg",
+              "isImageflow": false,
+              "latestVersion": "v1.0.0",
+              "mainColor": "#00B83E"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": -180,
+      "y": 0,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

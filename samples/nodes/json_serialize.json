@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "node_type": "json_serialize",
+    "description": "JSON 序列化节点 — 把任意类型变量转化为 JSON 字符串",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.inputParameters": "单项输入，name='input'，type 可为任意类型（boolean/object/list 等）",
+      "outputs": "[{type:'string', name:'output'}]，固定输出 JSON 字符串",
+      "data 字段顺序": "inputs → outputs → nodeMeta（与 LLM/Code 节点顺序相反，同变量聚合节点）",
+      "icon": "icon-to_json.png（.png 后缀，非 .jpg）"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "161390",
+          "type": "58",
+          "meta": {
+            "position": {
+              "x": 1601.935853611146,
+              "y": -109.8594069553458
+            }
+          },
+          "data": {
+            "inputs": {
+              "inputParameters": [
+                {
+                  "name": "input",
+                  "input": {
+                    "type": "boolean",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {"type": 3}
+                    }
+                  }
+                }
+              ]
+            },
+            "outputs": [
+              {
+                "type": "string",
+                "name": "output"
+              }
+            ],
+            "nodeMeta": {
+              "title": "JSON 序列化",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-to_json.png",
+              "description": "用于把变量转化为JSON字符串",
+              "mainColor": "#F2B600",
+              "subTitle": "JSON 序列化"
+            }
+          },
+          "_temp": {
+            "bounds": {
+              "x": 1421.935853611146,
+              "y": -109.8594069553458,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-to_json.png",
+              "description": "用于把变量转化为JSON字符串",
+              "title": "JSON 序列化",
+              "mainColor": "#F2B600"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 1421.935853611146,
+      "y": -109.8594069553458,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

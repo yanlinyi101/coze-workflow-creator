@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "node_type": "variable_assign",
+    "description": "变量赋值节点 — 对应用变量或用户变量进行写入赋值",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.inputParameters": "赋值参数列表，每项 {name（变量名）, input（值，支持 ref/literal）}。初始为 [{}] 占位符",
+      "inputs.variableTypeMap": "变量类型映射表，key 为变量名，value 为类型字符串。配置前为 {}",
+      "outputs": "固定输出 [{name:'isSuccess', type:'boolean'}]，表示赋值是否成功"
+    },
+    "important": "变量赋值节点只能赋值给已在 Bot/应用中定义的变量，不能创建新变量"
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "143484",
+          "type": "40",
+          "meta": {
+            "position": {
+              "x": 642.079939315973,
+              "y": -67.06975531967558
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "description": "用于给支持写入的变量赋值，包括应用变量、用户变量",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/Variable.jpg",
+              "mainColor": "#FF811A",
+              "subTitle": "变量赋值",
+              "title": "变量赋值"
+            },
+            "inputs": {
+              "inputParameters": [{}],
+              "variableTypeMap": {}
+            },
+            "outputs": [
+              {
+                "name": "isSuccess",
+                "type": "boolean"
+              }
+            ]
+          },
+          "_temp": {
+            "bounds": {
+              "x": 462.079939315973,
+              "y": -67.06975531967558,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/Variable.jpg",
+              "description": "用于给支持写入的变量赋值，包括应用变量、用户变量",
+              "title": "变量赋值",
+              "mainColor": "#FF811A"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 462.079939315973,
+      "y": -67.06975531967558,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

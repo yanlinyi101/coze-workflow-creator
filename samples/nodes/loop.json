@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "node_type": "loop",
+    "description": "循环节点 — 容器节点，循环体内放置要重复执行的子节点",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "blocks": "循环体内的子节点数组，子节点的 meta.position 为相对于循环体的坐标",
+      "edges (inner)": "循环体内部的连线。从循环节点本身出发的第一条连线需要 sourcePortID: 'loop-function-inline-output'",
+      "edges (outer)": "循环节点对外的输出连线需要 sourcePortID: 'loop-output'（在外层 edges 数组中设置）",
+      "meta.canvasPosition": "循环体在画布上的绝对位置（打开循环体时的视口位置）",
+      "inputs.inputParameters": "循环节点自身的输入变量，通常为空数组 []",
+      "subTitle": "显示在节点下方的小字，固定为 '循环'"
+    },
+    "important": "Loop 和 Batch 是容器节点，节点 JSON 本身不含 loopType/loopCount/outputs 等字段——这些配置在循环体面板内设置，不出现在 clipboard JSON 顶层"
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "154789",
+          "type": "21",
+          "meta": {
+            "position": {
+              "x": 69.37118294560453,
+              "y": -83.17718909259219
+            },
+            "canvasPosition": {
+              "x": -5.7968413280062805,
+              "y": 202.7291243629631
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "title": "循环",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Loop-v2.jpg",
+              "description": "用于通过设定循环次数和逻辑，重复执行一系列任务",
+              "mainColor": "#00B2B2",
+              "subTitle": "循环"
+            },
+            "inputs": {
+              "inputParameters": []
+            }
+          },
+          "blocks": [
+            {
+              "id": "192691",
+              "type": "9",
+              "meta": {
+                "position": {
+                  "x": -94.85488777384226,
+                  "y": 99.99999999999996
+                }
+              },
+              "data": {
+                "nodeMeta": {
+                  "title": "子工作流名称",
+                  "description": "子工作流描述",
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Workflow-v2.jpg",
+                  "isImageflow": false
+                },
+                "inputs": {
+                  "workflowId": "子工作流ID",
+                  "spaceId": "空间ID",
+                  "workflowVersion": "v1.0.0",
+                  "inputDefs": [
+                    {
+                      "input": {},
+                      "name": "param1",
+                      "required": true,
+                      "type": "string"
+                    }
+                  ],
+                  "type": 0,
+                  "inputParameters": [
+                    {
+                      "name": "param1",
+                      "input": {
+                        "type": "string",
+                        "value": {
+                          "type": "ref",
+                          "content": {
+                            "source": "block-output",
+                            "blockID": "100001",
+                            "name": "input"
+                          },
+                          "rawMeta": {
+                            "type": 1
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "settingOnError": {}
+                },
+                "outputs": [
+                  {
+                    "type": "string",
+                    "name": "output",
+                    "required": false
+                  }
+                ]
+              },
+              "_temp": {
+                "bounds": {
+                  "x": -280.65172910184856,
+                  "y": 302.72912436296303,
+                  "width": 360,
+                  "height": 112
+                },
+                "externalData": {
+                  "title": "子工作流名称",
+                  "description": "子工作流描述",
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Workflow-v2.jpg",
+                  "isImageflow": false,
+                  "latestVersion": "v1.0.0",
+                  "mainColor": "#00B83E"
+                }
+              }
+            },
+            {
+              "id": "173901",
+              "type": "32",
+              "meta": {
+                "position": {
+                  "x": 429.5315672777763,
+                  "y": 112.99999999999997
+                }
+              },
+              "data": {
+                "inputs": {
+                  "mergeGroups": [
+                    {
+                      "name": "Group1",
+                      "variables": []
+                    }
+                  ]
+                },
+                "outputs": [],
+                "nodeMeta": {
+                  "title": "变量聚合",
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+                  "description": "对多个分支的输出进行聚合处理",
+                  "mainColor": "#00B2B2",
+                  "subTitle": "变量聚合"
+                }
+              },
+              "_temp": {
+                "bounds": {
+                  "x": 243.73472594977,
+                  "y": 315.72912436296303,
+                  "width": 360,
+                  "height": 86
+                },
+                "externalData": {
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+                  "description": "对多个分支的输出进行聚合处理",
+                  "title": "变量聚合",
+                  "mainColor": "#00B2B2"
+                }
+              }
+            }
+          ],
+          "edges": [
+            {
+              "sourceNodeID": "154789",
+              "targetNodeID": "192691",
+              "sourcePortID": "loop-function-inline-output"
+            },
+            {
+              "sourceNodeID": "192691",
+              "targetNodeID": "173901"
+            }
+          ],
+          "_temp": {
+            "bounds": {
+              "x": -110.62881705439547,
+              "y": -83.17718909259219,
+              "width": 360,
+              "height": 138
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Loop-v2.jpg",
+              "description": "用于通过设定循环次数和逻辑，重复执行一系列任务",
+              "title": "循环",
+              "mainColor": "#00B2B2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": -110.62881705439547,
+      "y": -83.17718909259219,
+      "width": 360,
+      "height": 138
+    }
+  }
+}

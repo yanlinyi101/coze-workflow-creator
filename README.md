@@ -92,8 +92,19 @@ pbpaste | pbcopy
 | 选择器（条件分支） | `samples/nodes/condition.json` | ✅ 已验证 |
 | HTTP 请求 | `samples/nodes/http.json` | ✅ 已验证 |
 | 插件调用 | `samples/nodes/plugin.json` | ✅ 已验证 |
+| 循环 | `samples/nodes/loop.json` | ✅ 已验证 |
+| 子工作流 | `samples/nodes/subworkflow.json` | ✅ 已验证 |
+| 变量聚合 | `samples/nodes/variable_aggregation.json` | ✅ 已验证 |
+| 批处理 | `samples/nodes/batch.json` | ✅ 已验证 |
+| 意图识别 | `samples/nodes/intent.json` | ✅ 已验证 |
+| 文本处理 | `samples/nodes/text_processing.json` | ✅ 已验证 |
+| 变量赋值 | `samples/nodes/variable_assign.json` | ✅ 已验证 |
+| 知识库检索 | `samples/nodes/knowledge_retrieval.json` | ✅ 已验证 |
+| JSON 序列化 | `samples/nodes/json_serialize.json` | ✅ 已验证 |
+| JSON 反序列化 | `samples/nodes/json_deserialize.json` | ✅ 已验证 |
+| 问答（选项/文本两种模式） | `samples/nodes/question.json` | ✅ 已验证 |
 
-更多节点类型持续补充中，欢迎贡献样本。
+其他节点（数据库、知识库写入/删除、图像处理、音视频、会话管理、消息管理、长期记忆、异步任务等）不提供样本，生成工作流时如需使用，引导用户在 Coze 画布右键复制节点 JSON 提供。
 
 ---
 

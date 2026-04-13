@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "node_type": "question",
+    "description": "问答节点 — 在流程执行中向用户提问，支持选项问答和开放式文本问答两种模式",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.answer_type": "'option'=选项选择（单选），'text'=开放式文本输入",
+      "inputs.option_type": "'static'=预设选项，'dynamic'=动态选项（引用变量）",
+      "inputs.options": "answer_type='option' 时的选项列表，每项 {name:'选项文字'}",
+      "inputs.dynamic_option": "option_type='dynamic' 时引用的选项变量",
+      "inputs.llmParam": "用于生成问题的模型配置（扁平对象，同意图识别节点）",
+      "inputs.inputParameters": "传给模型的上下文变量",
+      "inputs.extra_output": "是否输出额外信息，通常 false",
+      "inputs.limit": "最多追问轮次，默认 3",
+      "outputs (option模式)": "optionId(string), optionContent(string), QUESTION_DATA(object:{title, options:[{name}]})",
+      "outputs (text模式)": "USER_RESPONSE(string, 用户回复), QUESTION_DATA(list:[{content_type, content}])"
+    },
+    "variants": {
+      "option": "选项问答，用户从预设选项中选择，输出 optionId 和 optionContent",
+      "text": "文本问答，用户自由输入，输出 USER_RESPONSE"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "148183",
+          "type": "18",
+          "meta": {
+            "position": {
+              "x": 0,
+              "y": 0
+            }
+          },
+          "data": {
+            "inputs": {
+              "llmParam": {
+                "modelType": 1772546477,
+                "modelName": "豆包·2.0·lite",
+                "generationDiversity": "balance",
+                "frequencyPenalty": 0,
+                "maxTokens": 4096,
+                "maxOutputTokens": 4096,
+                "store": true,
+                "cachingExpireTime": 259200,
+                "responseFormat": 2,
+                "parameters": {
+                  "max_completion_tokens": 0
+                },
+                "systemPrompt": ""
+              },
+              "inputParameters": [
+                {
+                  "name": "input",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {"type": 1}
+                    }
+                  }
+                }
+              ],
+              "extra_output": false,
+              "answer_type": "option",
+              "option_type": "static",
+              "dynamic_option": {
+                "type": "string",
+                "value": {
+                  "type": "ref",
+                  "content": {
+                    "source": "block-output",
+                    "blockID": "",
+                    "name": ""
+                  }
+                }
+              },
+              "options": [
+                {"name": "选项A"},
+                {"name": "选项B"}
+              ],
+              "limit": 3
+            },
+            "nodeMeta": {
+              "title": "问答",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Direct-Question-v2.jpg",
+              "description": "支持中间向用户提问问题,支持预置选项提问和开放式问题提问两种方式",
+              "mainColor": "#3071F2",
+              "subTitle": "问答"
+            },
+            "outputs": [
+              {"type": "string", "name": "optionId", "required": false},
+              {"type": "string", "name": "optionContent", "required": false},
+              {
+                "type": "object",
+                "name": "QUESTION_DATA",
+                "schema": [
+                  {"type": "string", "name": "title"},
+                  {
+                    "type": "list",
+                    "name": "options",
+                    "schema": {
+                      "type": "object",
+                      "schema": [{"type": "string", "name": "name"}]
+                    }
+                  }
+                ],
+                "required": false
+              }
+            ]
+          },
+          "_temp": {
+            "bounds": {
+              "x": -180,
+              "y": 0,
+              "width": 360,
+              "height": 242
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Direct-Question-v2.jpg",
+              "description": "支持中间向用户提问问题,支持预置选项提问和开放式问题提问两种方式",
+              "title": "问答",
+              "mainColor": "#3071F2"
+            }
+          }
+        },
+        {
+          "id": "199491",
+          "type": "18",
+          "meta": {
+            "position": {
+              "x": 460,
+              "y": 0
+            }
+          },
+          "data": {
+            "inputs": {
+              "llmParam": {
+                "modelType": 1772546477,
+                "modelName": "豆包·2.0·lite",
+                "generationDiversity": "balance",
+                "frequencyPenalty": 0,
+                "maxTokens": 4096,
+                "maxOutputTokens": 4096,
+                "store": true,
+                "cachingExpireTime": 259200,
+                "responseFormat": 2,
+                "parameters": {
+                  "max_completion_tokens": 0
+                },
+                "systemPrompt": ""
+              },
+              "inputParameters": [
+                {
+                  "name": "input",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {"type": 1}
+                    }
+                  }
+                }
+              ],
+              "extra_output": false,
+              "answer_type": "text",
+              "option_type": "static",
+              "dynamic_option": {
+                "type": "string",
+                "value": {
+                  "type": "ref",
+                  "content": {
+                    "source": "block-output",
+                    "blockID": "",
+                    "name": ""
+                  }
+                }
+              },
+              "options": [
+                {"name": ""},
+                {"name": ""}
+              ],
+              "limit": 3
+            },
+            "nodeMeta": {
+              "title": "问答",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Direct-Question-v2.jpg",
+              "description": "支持中间向用户提问问题,支持预置选项提问和开放式问题提问两种方式",
+              "mainColor": "#3071F2",
+              "subTitle": "问答"
+            },
+            "outputs": [
+              {"type": "string", "name": "USER_RESPONSE", "required": true, "description": "用户本轮对话输入内容"},
+              {
+                "type": "list",
+                "name": "QUESTION_DATA",
+                "schema": {
+                  "type": "object",
+                  "schema": [
+                    {"type": "string", "name": "content_type"},
+                    {"type": "string", "name": "content"}
+                  ]
+                },
+                "required": true,
+                "description": "问题列表"
+              }
+            ]
+          },
+          "_temp": {
+            "bounds": {
+              "x": 280,
+              "y": 0,
+              "width": 360,
+              "height": 164
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Direct-Question-v2.jpg",
+              "description": "支持中间向用户提问问题,支持预置选项提问和开放式问题提问两种方式",
+              "title": "问答",
+              "mainColor": "#3071F2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": -180,
+      "y": 0,
+      "width": 1000,
+      "height": 242
+    }
+  }
+}

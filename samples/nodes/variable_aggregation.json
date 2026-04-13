@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "node_type": "variable_aggregation",
+    "description": "变量聚合节点 — 将来自不同分支的变量合并为一个输出，常用于条件分支后汇聚结果",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.mergeGroups": "聚合分组数组。每组含 name（组名，作为引用 key）和 variables（来自不同分支的 ref 数组，取第一个非空值）",
+      "outputs": "固定为空数组 []，聚合结果通过 mergeGroups[].name 在下游引用",
+      "nodeMeta 位置": "注意：此节点 data 字段中，inputs 和 outputs 在前，nodeMeta 在后（与 LLM/Code 节点顺序相反）",
+      "icon": "VariableMerge-icon.jpg（注意：无 v2 后缀，也无 icon- 前缀，与其他节点命名规范不同）"
+    },
+    "usage": "典型用法：选择器（If）节点后，两个分支各产生一个 output 变量，用变量聚合将两个 output 配置在同一个 Group 的 variables 里，下游通过 Group 名称引用聚合结果"
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "173901",
+          "type": "32",
+          "meta": {
+            "position": {
+              "x": 429.5315672777763,
+              "y": 112.99999999999997
+            }
+          },
+          "data": {
+            "inputs": {
+              "mergeGroups": [
+                {
+                  "name": "Group1",
+                  "variables": []
+                }
+              ]
+            },
+            "outputs": [],
+            "nodeMeta": {
+              "title": "变量聚合",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+              "description": "对多个分支的输出进行聚合处理",
+              "mainColor": "#00B2B2",
+              "subTitle": "变量聚合"
+            }
+          },
+          "_temp": {
+            "bounds": {
+              "x": 243.73472594977,
+              "y": 315.72912436296303,
+              "width": 360,
+              "height": 86
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/VariableMerge-icon.jpg",
+              "description": "对多个分支的输出进行聚合处理",
+              "title": "变量聚合",
+              "mainColor": "#00B2B2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 243.73472594977,
+      "y": 315.72912436296303,
+      "width": 360,
+      "height": 86
+    }
+  }
+}

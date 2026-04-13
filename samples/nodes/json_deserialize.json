@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "node_type": "json_deserialize",
+    "description": "JSON 反序列化节点 — 把 JSON 字符串转化为结构化变量（object/list）",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.inputParameters": "单项输入，name='input'，type='string'（JSON 字符串）",
+      "outputs": "[{type:'object', name:'output', schema:[]}]，schema 为空时输出 object，需在节点面板手动配置字段",
+      "data 字段顺序": "inputs → outputs → nodeMeta（同 JSON 序列化节点）",
+      "icon": "icon-from_json.png（.png 后缀）"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "155007",
+          "type": "59",
+          "meta": {
+            "position": {
+              "x": 2066.3737176349377,
+              "y": -145.5141768177675
+            }
+          },
+          "data": {
+            "inputs": {
+              "inputParameters": [
+                {
+                  "name": "input",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "output"
+                      },
+                      "rawMeta": {"type": 1}
+                    }
+                  }
+                }
+              ]
+            },
+            "outputs": [
+              {
+                "type": "object",
+                "name": "output",
+                "schema": []
+              }
+            ],
+            "nodeMeta": {
+              "title": "JSON 反序列化",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-from_json.png",
+              "description": "用于把JSON字符串转化为变量",
+              "mainColor": "#F2B600",
+              "subTitle": "JSON 反序列化"
+            }
+          },
+          "_temp": {
+            "bounds": {
+              "x": 1886.3737176349377,
+              "y": -145.5141768177675,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-from_json.png",
+              "description": "用于把JSON字符串转化为变量",
+              "title": "JSON 反序列化",
+              "mainColor": "#F2B600"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 1886.3737176349377,
+      "y": -145.5141768177675,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

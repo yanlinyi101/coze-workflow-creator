@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "node_type": "batch",
+    "description": "批处理节点 — 容器节点，批处理体内放置要并发批量执行的子节点",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "blocks": "批处理体内的子节点数组",
+      "data": "批处理节点顶层 data 只有 nodeMeta，无 inputs/outputs 字段",
+      "meta.canvasPosition": "批处理体在画布上的绝对位置（打开批处理体时的视口位置）",
+      "subTitle": "显示在节点下方的小字，固定为 '批处理'"
+    },
+    "important": "Batch 是容器节点，batchSize/concurrentSize/inputParameters 等配置在批处理体面板内设置，不出现在 clipboard JSON 顶层 data 中。与 Loop 的区别：Loop 有内部 edges，Batch 的 edges 在外层",
+    "difference_from_loop": "Loop(21) 的 data 包含 inputs.inputParameters；Batch(28) 的 data 只有 nodeMeta。Loop 的内部 edges 使用 sourcePortID='loop-function-inline-output'；Batch 无此特殊端口"
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "195000",
+          "type": "28",
+          "meta": {
+            "position": {
+              "x": 1134.2515268217583,
+              "y": -118.77953086736011
+            },
+            "canvasPosition": {
+              "x": 1200.4709767770821,
+              "y": 154.40682304421327
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "title": "批处理",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Batch-v2.jpg",
+              "description": "通过设定批量运行次数和逻辑，运行批处理体内的任务",
+              "mainColor": "#00B2B2",
+              "subTitle": "批处理"
+            }
+          },
+          "blocks": [
+            {
+              "id": "106182",
+              "type": "22",
+              "meta": {
+                "position": {
+                  "x": 0,
+                  "y": 100
+                }
+              },
+              "data": {
+                "nodeMeta": {
+                  "title": "意图识别",
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Intent-v2.jpg",
+                  "description": "用于用户输入的意图识别，并将其与预设意图选项进行匹配。",
+                  "mainColor": "#00B2B2",
+                  "subTitle": "意图识别"
+                },
+                "outputs": [
+                  {
+                    "type": "integer",
+                    "name": "classificationId"
+                  }
+                ],
+                "inputs": {
+                  "chatHistorySetting": {
+                    "enableChatHistory": false,
+                    "chatHistoryRound": 3
+                  },
+                  "inputParameters": [
+                    {
+                      "name": "query",
+                      "input": {
+                        "type": "string",
+                        "value": {
+                          "type": "ref",
+                          "content": {
+                            "source": "block-output",
+                            "blockID": "100001",
+                            "name": "input"
+                          },
+                          "rawMeta": {
+                            "type": 1
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "llmParam": {
+                    "modelType": 1772546477,
+                    "modelName": "豆包·2.0·lite",
+                    "generationDiversity": "default_val",
+                    "frequencyPenalty": 0,
+                    "maxTokens": 100,
+                    "maxOutputTokens": 4096,
+                    "store": true,
+                    "cachingExpireTime": 259200,
+                    "responseFormat": 2,
+                    "temperature": 0.3,
+                    "topP": 1,
+                    "thinkingType": "disabled",
+                    "parameters": {
+                      "max_completion_tokens": 0,
+                      "reasoning_effort": "minimal"
+                    },
+                    "prompt": {
+                      "type": "string",
+                      "value": {
+                        "type": "literal",
+                        "content": "{{query}}"
+                      }
+                    },
+                    "systemPrompt": {
+                      "type": "string",
+                      "value": {
+                        "type": "literal",
+                        "content": ""
+                      }
+                    },
+                    "enableChatHistory": false,
+                    "chatHistoryRound": 3
+                  },
+                  "intents": [
+                    {
+                      "name": ""
+                    }
+                  ],
+                  "mode": "top_speed",
+                  "version": "2",
+                  "settingOnError": {
+                    "processType": 1,
+                    "timeoutMs": 60000,
+                    "retryTimes": 0
+                  }
+                }
+              },
+              "_temp": {
+                "bounds": {
+                  "x": 1020.4709767770821,
+                  "y": 254.40682304421327,
+                  "width": 360,
+                  "height": 176
+                },
+                "externalData": {
+                  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Intent-v2.jpg",
+                  "description": "用于用户输入的意图识别，并将其与预设意图选项进行匹配。",
+                  "title": "意图识别",
+                  "mainColor": "#00B2B2"
+                }
+              }
+            }
+          ],
+          "_temp": {
+            "bounds": {
+              "x": 954.2515268217583,
+              "y": -118.77953086736011,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-Batch-v2.jpg",
+              "description": "通过设定批量运行次数和逻辑，运行批处理体内的任务",
+              "title": "批处理",
+              "mainColor": "#00B2B2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 954.2515268217583,
+      "y": -118.77953086736011,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

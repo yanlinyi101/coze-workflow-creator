@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "node_type": "text_processing",
+    "description": "文本处理节点 — 对多个字符串变量进行拼接或格式处理",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.method": "处理方式，'concat'=字符串拼接",
+      "inputs.inputParameters": "参与处理的字符串变量列表，每项 {name, input}",
+      "inputs.concatParams[concatResult]": "拼接结果模板，literal 空字符串时按 arrayItemConcatChar 分隔",
+      "inputs.concatParams[arrayItemConcatChar]": "数组元素间的分隔符，默认 '，'",
+      "inputs.concatParams[allArrayItemConcatChars]": "可选分隔符列表（换行/制表符/句号/逗号/分号/空格），固定结构，直接复制即可",
+      "outputs": "[{type:'string', name:'output', required:true}]，固定单输出"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "120117",
+          "type": "15",
+          "meta": {
+            "position": {
+              "x": 176.75407476504841,
+              "y": -67.06975531967556
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "description": "用于处理多个字符串类型变量的格式",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-StrConcat-v2.jpg",
+              "mainColor": "#3071F2",
+              "subTitle": "文本处理",
+              "title": "文本处理"
+            },
+            "inputs": {
+              "method": "concat",
+              "inputParameters": [
+                {
+                  "name": "String1",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {
+                        "type": 1
+                      }
+                    }
+                  }
+                }
+              ],
+              "concatParams": [
+                {
+                  "name": "concatResult",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "literal",
+                      "content": "",
+                      "rawMeta": {
+                        "type": 1
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "arrayItemConcatChar",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "literal",
+                      "content": "，",
+                      "rawMeta": {
+                        "type": 1
+                      }
+                    }
+                  }
+                },
+                {
+                  "name": "allArrayItemConcatChars",
+                  "input": {
+                    "type": "list",
+                    "schema": {
+                      "type": "object",
+                      "schema": [
+                        {"type": "string", "name": "label", "required": true},
+                        {"type": "string", "name": "value", "required": true},
+                        {"type": "boolean", "name": "isDefault", "required": true}
+                      ]
+                    },
+                    "value": {
+                      "type": "literal",
+                      "content": [
+                        {"isDefault": true, "label": "换行", "value": "\n"},
+                        {"isDefault": true, "label": "制表符", "value": "\t"},
+                        {"isDefault": true, "label": "句号", "value": "。"},
+                        {"isDefault": true, "label": "逗号", "value": "，"},
+                        {"isDefault": true, "label": "分号", "value": "；"},
+                        {"isDefault": true, "label": "空格", "value": " "}
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "outputs": [
+              {
+                "type": "string",
+                "name": "output",
+                "required": true
+              }
+            ]
+          },
+          "_temp": {
+            "bounds": {
+              "x": -3.245925234951585,
+              "y": -67.06975531967556,
+              "width": 360,
+              "height": 112
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-StrConcat-v2.jpg",
+              "description": "用于处理多个字符串类型变量的格式",
+              "title": "文本处理",
+              "mainColor": "#3071F2"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": -3.245925234951585,
+      "y": -67.06975531967556,
+      "width": 360,
+      "height": 112
+    }
+  }
+}

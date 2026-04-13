@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "node_type": "knowledge_retrieval",
+    "description": "知识库检索节点 — 根据输入变量从知识库中召回最匹配的内容片段",
+    "collected_date": "2026-04-13",
+    "source": "verified",
+    "fields": {
+      "inputs.datasetParam[datasetList]": "知识库 ID 列表（字符串列表），在 Coze 知识库管理页面获取 ID",
+      "inputs.datasetParam[topK]": "召回数量，默认 5",
+      "inputs.datasetParam[useRerank]": "是否启用重排序，true=精度更高",
+      "inputs.datasetParam[useRewrite]": "是否启用查询改写",
+      "inputs.datasetParam[isPersonalOnly]": "是否只检索个人知识库",
+      "inputs.datasetParam[datasetType]": "知识库类型，0=普通",
+      "inputs.datasetParam[minScore]": "最低相似度阈值，0-1，默认 0.5",
+      "inputs.datasetParam[strategy]": "检索策略，1=混合检索",
+      "inputs.inputParameters[Query]": "检索关键词，通常引用上游用户输入",
+      "inputs.inputParameters[enableChatHistory]": "是否使用对话历史增强检索",
+      "outputs[outputList]": "检索结果列表，每项含 output（文本内容）和 documentId（文档ID）"
+    }
+  },
+  "node": {
+    "type": "coze-workflow-clipboard-data",
+    "source": {
+      "workflowId": "7628077670877954102",
+      "flowMode": 0,
+      "spaceId": "7505956491577720843",
+      "isDouyin": false,
+      "host": "www.coze.cn"
+    },
+    "json": {
+      "nodes": [
+        {
+          "id": "122177",
+          "type": "6",
+          "meta": {
+            "position": {
+              "x": 1107.4058038668975,
+              "y": -93.06975531967561
+            }
+          },
+          "data": {
+            "nodeMeta": {
+              "description": "在选定的知识中,根据输入变量召回最匹配的信息,并以列表形式返回",
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-KnowledgeQuery-v2.jpg",
+              "mainColor": "#FF811A",
+              "subTitle": "知识库检索",
+              "title": "知识库检索"
+            },
+            "outputs": [
+              {
+                "type": "list",
+                "name": "outputList",
+                "schema": {
+                  "type": "object",
+                  "schema": [
+                    {"type": "string", "name": "output"},
+                    {"type": "string", "name": "documentId"}
+                  ]
+                }
+              }
+            ],
+            "inputs": {
+              "datasetParam": [
+                {
+                  "name": "datasetList",
+                  "input": {
+                    "type": "list",
+                    "schema": {"type": "string"},
+                    "value": {
+                      "type": "literal",
+                      "content": ["知识库ID"]
+                    }
+                  }
+                },
+                {
+                  "name": "topK",
+                  "input": {
+                    "type": "integer",
+                    "value": {"type": "literal", "content": "5", "rawMeta": {"type": 2}}
+                  }
+                },
+                {
+                  "name": "useRerank",
+                  "input": {
+                    "type": "boolean",
+                    "value": {"type": "literal", "content": true, "rawMeta": {"type": 3}}
+                  }
+                },
+                {
+                  "name": "useRewrite",
+                  "input": {
+                    "type": "boolean",
+                    "value": {"type": "literal", "content": true, "rawMeta": {"type": 3}}
+                  }
+                },
+                {
+                  "name": "isPersonalOnly",
+                  "input": {
+                    "type": "boolean",
+                    "value": {"type": "literal", "content": true, "rawMeta": {"type": 3}}
+                  }
+                },
+                {
+                  "name": "datasetType",
+                  "input": {
+                    "type": "integer",
+                    "value": {"type": "literal", "content": "0", "rawMeta": {"type": 2}}
+                  }
+                },
+                {
+                  "name": "VolcanoInfoList",
+                  "input": {
+                    "type": "list",
+                    "schema": {
+                      "type": "object",
+                      "schema": [
+                        {"type": "string", "name": "datasetID"},
+                        {"type": "string", "name": "volcanoServiceID"}
+                      ]
+                    },
+                    "value": {"type": "literal", "content": []}
+                  }
+                },
+                {
+                  "name": "minScore",
+                  "input": {
+                    "type": "float",
+                    "value": {"type": "literal", "content": "0.5", "rawMeta": {"type": 4}}
+                  }
+                },
+                {
+                  "name": "strategy",
+                  "input": {
+                    "type": "integer",
+                    "value": {"type": "literal", "content": "1", "rawMeta": {"type": 2}}
+                  }
+                }
+              ],
+              "inputParameters": [
+                {
+                  "name": "Query",
+                  "input": {
+                    "type": "string",
+                    "value": {
+                      "type": "ref",
+                      "content": {
+                        "source": "block-output",
+                        "blockID": "上游节点ID",
+                        "name": "上游输出变量名"
+                      },
+                      "rawMeta": {"type": 1}
+                    }
+                  }
+                },
+                {
+                  "name": "enableChatHistory",
+                  "input": {
+                    "type": "boolean",
+                    "value": {"type": "literal", "content": false, "rawMeta": {"type": 3}}
+                  }
+                },
+                {
+                  "name": "chatHistoryRound",
+                  "input": {
+                    "type": "float",
+                    "value": {"type": "literal", "content": 3, "rawMeta": {"type": 4}}
+                  }
+                }
+              ]
+            }
+          },
+          "_temp": {
+            "bounds": {
+              "x": 927.4058038668975,
+              "y": -93.06975531967561,
+              "width": 360,
+              "height": 138
+            },
+            "externalData": {
+              "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/dvsmryvd_avi_dvsm/ljhwZthlaukjlkulzlp/icon/icon-KnowledgeQuery-v2.jpg",
+              "description": "在选定的知识中,根据输入变量召回最匹配的信息,并以列表形式返回",
+              "title": "知识库检索",
+              "mainColor": "#FF811A"
+            }
+          }
+        }
+      ],
+      "edges": []
+    },
+    "bounds": {
+      "x": 927.4058038668975,
+      "y": -93.06975531967561,
+      "width": 360,
+      "height": 138
+    }
+  }
+}
